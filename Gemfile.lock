@@ -1,0 +1,14 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    daemon_controller (0.2.6)
+    minitest (2.1.0)
+    mocha (0.9.12)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  daemon_controller
+  minitest
+  mocha
