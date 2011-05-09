@@ -1,6 +1,6 @@
 class String
-  def process_erb
-    ERB.new(self).result(binding).gsub(/^\s+/, '')
+  def process_erb(world_binding = binding)
+    ERB.new(self).result(world_binding).gsub(/^\s+/, '')
   end
 end
 
