@@ -1,4 +1,4 @@
 test/tmp/config/ssh_hostkey
 test/tmp/config/ssh_hostkey.pub
 tmp/*
-lib
+lib/*.bundle

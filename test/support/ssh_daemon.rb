@@ -3,7 +3,7 @@ require 'daemon_controller'
 
 class SSH
   class << self
-    
+
     def daemon
       write_configuration_file!
       write_hostkey_file!
