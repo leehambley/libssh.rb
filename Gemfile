@@ -8,3 +8,7 @@ group :test do
   gem "mocha"
   gem "minitest"
 end
+
+group :development do
+  gem "rake-compiler"
+end

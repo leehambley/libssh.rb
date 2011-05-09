@@ -48,6 +48,8 @@ You will require `libssh`, available from [http://www.libssh.org/] or via your p
     # brew install libssh
     # aptitude install libssh
 
+*Note*: Currently, you'll need this homebrew installation: https://gist.github.com/963366 as the current release of libssh does not build cleanly on OSX.
+
 See your platform (or package manager) specific notes on how and where this is installed. This Gem will search the usual unix prefix locations, for more information see [the mkmf configuration](). If the headers and library for `libssh` have been installed to somewhere else by your package manager, you may need to override the
 
 ## Defaults
