@@ -3,3 +3,4 @@ test/tmp/config/ssh_hostkey.pub
 test/tmp/log/*
 lib/*.bundle
 tmp
+mkmf.log
