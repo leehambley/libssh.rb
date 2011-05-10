@@ -5,16 +5,26 @@ class SSH
   class << self
 
     def daemon
-      write_configuration_file!
-      write_hostkey_file!
       DaemonController.new(
         :identifier     => "Test SSH Server",
-        :start_command  => "#{sshd} -f #{configuration_filename} -h #{hostkey_filename}",
+        :start_command  => "#{sshd} -f #{configuration_filename} -h #{hostkey_filename} -e  2> #{log_filename}",
         :ping_command   => lambda { TCPSocket.new('localhost', 2234) },
         :pid_file       => pid_file,
-        :log_file       => '/var/log/libsshrb-test-sshd.log'
+        :log_file       => log_filename
       )
     end
+    
+    def write_configurations
+      write_configuration_file! unless File.exists?(configuration_filename)
+      write_hostkey_file!       unless File.exits?(hostkey_filename)
+    end
+    
+    def write_configurations!
+      File.unlink configuration_filename
+      File.unlink hostkey_filename
+      write_configurations
+    end
+    
     private
       def sshd
         `which sshd`.chomp
@@ -24,8 +34,11 @@ class SSH
           file.write default_configuration.process_erb(binding)
         end
       end
+      def log_filename
+        File.join(Dir.pwd, %w(test tmp log sshd-error.log))
+      end
       def hostkey_filename
-        File.join(Dir.pwd, %w(test tmp config ssh_hostkey))
+        File.join(Dir.pwd, %w(test tmp config sshd_hostkey))
       end
       def write_hostkey_file!
         `echo 'Y' | ssh-keygen -b 1024 -f #{hostkey_filename} -N ''`
@@ -43,7 +56,6 @@ class SSH
           PasswordAuthentication yes
           ChrootDirectory <%= chroot %>
           PidFile <%= pid_file %>
-          SyslogFacility local6
           LogLevel INFO
         EOB
       end
@@ -51,7 +63,7 @@ class SSH
         File.join(Dir.pwd, %w(test tmp sandbox))
       end
       def pid_file
-        pid = File.join(Dir.pwd, %w(test pids sshd.pid))
+        pid = File.join(Dir.pwd, %w(test tmp pids sshd.pid))
         FileUtils.mkdir_p(File.dirname(pid))
         pid
       end

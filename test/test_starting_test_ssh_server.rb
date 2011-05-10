@@ -1,8 +1,9 @@
-require_relative '../helper'
+require_relative 'helper'
 
 class TestStartingSSHServer < MiniTest::Unit::TestCase
 
   def setup
+    SSH.write_configurations!
     SSH.daemon.start
   end
 

@@ -108,23 +108,7 @@ the warranty:
 The tests are slightly unusual in that they boot an SSH server (using
 your local implementation) in order to test the the Gem. For this to
 work one needs to have `sshd` installed, and in the path, and able to
-start on port `2234`. It also requires syslog, as DaemonController
-requires a logfile to watch for errors, and the OpenSSH SSH
-implementation cannot write directly to a log file, it instead must
-write to `syslogd`. 
-
-The tests expect that your syslogd is configured to write the
-`local6`(`.*`) facility to `/var/log/libsshrb-test-sshd.log`.
-
-To easily configure syslogd for this, simply add the following line to
-the appropriate configuration file (on OSX this is `/etc/syslog.conf`
-
-    local6.* /var/log/libsshrb-test-sshd.log
-
-If you are on OSX you can restart syslog with:
-
-    # launchctl unload /System/Library/LaunchDaemons/com.apple.syslogd.plist
-    # launchctl load /System/Library/LaunchDaemons/com.apple.syslogd.plist
+start on port `2234`.
 
 ## Credits
 
