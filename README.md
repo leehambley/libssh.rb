@@ -8,10 +8,10 @@ minimum features, with outstanding documentation.
 
 ## Reasons
 
-Ruby is not the ideal language for building crypto code with, owing to various 
-issues. Mix-in, that yet-another implementation of well established algorithms 
+Ruby is not the ideal language for building crypto code with, owing to various
+issues. Mix-in, that yet-another implementation of well established algorithms
 is a waste of resources, bindings to popular, fully featured libraries with a
-large community and extensive documentation allows us to make the most of the 
+large community and extensive documentation allows us to make the most of the
 best tool for each job.
 
 Ruby's extension architecture allows, and encourages C-extensions, and it is
@@ -46,7 +46,7 @@ You will require `libssh`, available from [http://www.libssh.org/] or via your p
 
     # port install libssh
     # brew install libssh
-    # aptitude install libssh
+    # aptitude install libssh-dev
 
 *Note*: Currently, you'll need this homebrew installation: https://gist.github.com/963366 as the current release of libssh does not build cleanly on OSX.
 
@@ -76,10 +76,10 @@ Note, until the project stabilizes, it is under the most draconian,
 restrictive license I can find, basically because I don't want people to work
 with, share and build on my broken code.
 
-Until I find a suitable license, assume that this code is not free, it might 
+Until I find a suitable license, assume that this code is not free, it might
 be open source, but you have no permission to use it, for anything.
 
-This will change as soon as there's a project with some momentum, but in the 
+This will change as soon as there's a project with some momentum, but in the
 mean time this is to protect me from losing control of my work.
 
 ## Warranty
