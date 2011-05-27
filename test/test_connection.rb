@@ -9,9 +9,13 @@ class TestConnections < MiniTest::Unit::TestCase
   end
 
   def test_libssh_connection_should_accept_one_argument_and_assign_it_to_hostname
+    c = nil
     assert_silent do
-      LibSSH.connect 'hostname'
+      c = LibSSH.connect 'hostname'
     end
+    assert c
+    assert c.respond_to?(:hostname)
+    assert_equal 'hostname',  c.hostname
   end
 
 end

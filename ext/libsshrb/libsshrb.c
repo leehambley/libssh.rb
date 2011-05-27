@@ -23,20 +23,24 @@ void Init_rb_clibssh_connection()
 {
   rb_clibssh_connection = rb_define_class_under(rb_mlibssh, "Connection", rb_cObject);
   rb_define_alloc_func(rb_clibssh_connection, alloc_rb_libssh_connection);
-  rb_define_method(rb_clibssh_connection, "initialize", initialize_rb_clibssh_connection, -1);
+  rb_define_method(rb_clibssh_connection, "initialize", initialize_rb_clibssh_connection, 2);
+  rb_define_method(rb_clibssh_connection, "hostname", rb_clibssh_connection_hostname, 0);
 }
 
-VALUE initialize_rb_clibssh_connection(int argc, VALUE *argv, VALUE rb_clibssh_connection)
+VALUE rb_clibssh_connection_hostname(VALUE self)
 {
-  // Require at least a hostname
-  if(argc < 1)
-    rb_raise(rb_eArgError, "");
-  //
-  // –> How should I access RB_SSH_CONNECTION here to store the hostname there, too?
-  //
   RB_SSH_CONNECTION *rb_ssh_connection;
-  /* Data_Get_Struct(rb_ssh_connection, RB_SSH_CONNECTION, rb_ssh_connection);*/
-  
+  Data_Get_Struct(self, RB_SSH_CONNECTION, rb_ssh_connection);
+  return rb_str_new2(rb_ssh_connection->hostname);
+}
+
+VALUE initialize_rb_clibssh_connection(VALUE self, VALUE hostname, VALUE options)
+{
+  VALUE str;
+  RB_SSH_CONNECTION *rb_ssh_connection;
+  Data_Get_Struct(self, RB_SSH_CONNECTION, rb_ssh_connection);
+  str = StringValue(hostname);
+  rb_ssh_connection->hostname = str;
   return rb_clibssh_connection;
 }
 
