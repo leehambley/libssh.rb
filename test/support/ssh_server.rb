@@ -13,18 +13,18 @@ class SSH
         :log_file       => log_filename
       )
     end
-    
+
     def write_configurations
       write_configuration_file! unless File.exists?(configuration_filename)
-      write_hostkey_file!       unless File.exits?(hostkey_filename)
+      write_hostkey_file!       unless File.exists?(hostkey_filename)
     end
-    
+
     def write_configurations!
       File.unlink configuration_filename
       File.unlink hostkey_filename
       write_configurations
     end
-    
+
     private
       def sshd
         `which sshd`.chomp

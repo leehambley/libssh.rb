@@ -35,6 +35,7 @@ DEPENDENCIES
   daemon_controller
   minitest
   mocha
+  rake
   rake-compiler
   ruby-debug
   ruby-debug19

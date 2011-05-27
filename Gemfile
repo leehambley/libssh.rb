@@ -10,5 +10,6 @@ group :test do
 end
 
 group :development do
+  gem "rake"
   gem "rake-compiler"
 end
