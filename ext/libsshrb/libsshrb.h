@@ -14,15 +14,16 @@ void Init_libsshrb();
 void Init_rb_clibssh_connection();
 void Init_rb_libssh_constants();
 
-VALUE rb_clibssh_connection_initialize(int, VALUE*, VALUE);
+VALUE initialize_rb_clibssh_connection(int, VALUE*, VALUE);
 
 typedef struct rb_ssh_connection
 {
   ssh_session libssh_session;
+  char*       hostname;
 } RB_SSH_CONNECTION;
 
-VALUE alloc_libssh_session(VALUE);
-void free_libssh_session(RB_SSH_CONNECTION*);
+VALUE alloc_rb_libssh_connection(VALUE);
+void free_rb_libssh_connection(RB_SSH_CONNECTION*);
 
 
 #endif
