@@ -7,15 +7,22 @@
 extern VALUE rb_mlibssh;
 extern VALUE rb_clibssh_connection;
 
-void Init_libsshrb();
-void Init_libsshrb_connection_class();
+extern VALUE rb_elibssh_error;
+extern VALUE rb_elibssh_connection_error;
 
-typedef struct ssh_connection
+void Init_libsshrb();
+void Init_rb_clibssh_connection();
+void Init_rb_libssh_constants();
+
+VALUE rb_clibssh_connection_initialize(int, VALUE*, VALUE);
+
+typedef struct rb_ssh_connection
 {
   ssh_session libssh_session;
-} SSH_CONNECTION;
+} RB_SSH_CONNECTION;
 
 VALUE alloc_libssh_session(VALUE);
-void free_libssh_session(SSH_CONNECTION*);
+void free_libssh_session(RB_SSH_CONNECTION*);
+
 
 #endif
