@@ -4,6 +4,7 @@ class TestStartingSSHServer < MiniTest::Unit::TestCase
 
   def setup
     SSH.write_configurations
+    SSH.daemon.stop if SSH.daemon.running?
     SSH.daemon.start
   end
 
