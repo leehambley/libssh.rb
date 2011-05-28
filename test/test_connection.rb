@@ -8,6 +8,15 @@ class TestConnections < MiniTest::Unit::TestCase
     end
   end
 
+  #
+  # The connection is not actually opened until
+  # you try to do something which requires authentication
+  #
+  def test_should_report_not_connected_when_new
+    c = LibSSH.connect 'hostname'
+    assert (not c.connected?)
+  end
+
   def test_libssh_connection_should_accept_one_argument_and_assign_it_to_hostname
     c = nil
     assert_silent do
