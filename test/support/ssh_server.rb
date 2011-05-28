@@ -1,3 +1,4 @@
+require 'socket'
 require 'fileutils'
 require 'daemon_controller'
 
@@ -7,7 +8,7 @@ class SSH
     def daemon
       DaemonController.new(
         :identifier     => "Test SSH Server",
-        :start_command  => "#{sshd} -f #{configuration_filename} -h #{hostkey_filename} -e  2> #{log_filename}",
+        :start_command  => "#{sshd} -f #{configuration_filename} -h #{hostkey_filename} -d -e 2> #{log_filename}",
         :ping_command   => lambda { TCPSocket.new('localhost', 2234) },
         :pid_file       => pid_file,
         :log_file       => log_filename
