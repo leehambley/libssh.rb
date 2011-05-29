@@ -1,31 +1,31 @@
 #include <libsshrb.h>
 
-VALUE rb_mlibssh;
-VALUE rb_clibssh_connection;
+VALUE rb_mLibSSH;
+VALUE rb_cLibSSH_Connection;
 
-VALUE rb_elibssh_error;
-VALUE rb_elibssh_connection_error;
+VALUE rb_eLibSSH_Error;
+VALUE rb_eLibSSH_ConnectionError;
 
 void Init_libsshrb()
 {
-  rb_mlibssh = rb_define_module("LibSSH");
-  Init_rb_libssh_constants();
+  rb_mLibSSH = rb_define_module("LibSSH");
+  Init_libsshrb_constants();
   Init_rb_clibssh_connection();
 }
 
-void Init_rb_libssh_constants()
+void Init_libsshrb_constants()
 {
-  rb_elibssh_error = rb_define_class_under(rb_mlibssh, "Error", rb_eStandardError);
-  rb_elibssh_connection_error = rb_define_class_under(rb_mlibssh, "ConnectionError", rb_elibssh_error);
+  rb_eLibSSH_Error = rb_define_class_under(rb_mLibSSH, "Error", rb_eStandardError);
+  rb_eLibSSH_ConnectionError = rb_define_class_under(rb_mLibSSH, "ConnectionError", rb_eLibSSH_Error);
 }
 
 void Init_rb_clibssh_connection()
 {
-  rb_clibssh_connection = rb_define_class_under(rb_mlibssh, "Connection", rb_cObject);
-  rb_define_alloc_func(rb_clibssh_connection, alloc_rb_libssh_connection);
-  rb_define_method(rb_clibssh_connection, "initialize", initialize_rb_clibssh_connection, 2);
-  rb_define_method(rb_clibssh_connection, "connected?", rb_clibssh_connection_connected_q, 0);
-  rb_define_method(rb_clibssh_connection, "hostname", rb_clibssh_connection_hostname, 0);
+  rb_cLibSSH_Connection = rb_define_class_under(rb_mLibSSH, "Connection", rb_cObject);
+  rb_define_alloc_func(rb_cLibSSH_Connection, alloc_rb_libssh_connection);
+  rb_define_method(rb_cLibSSH_Connection, "initialize", initialize_rb_clibssh_connection, 2);
+  rb_define_method(rb_cLibSSH_Connection, "connected?", rb_clibssh_connection_connected_q, 0);
+  rb_define_method(rb_cLibSSH_Connection, "hostname", rb_clibssh_connection_hostname, 0);
 }
 
 VALUE rb_clibssh_connection_connected_q(VALUE self)
@@ -43,8 +43,8 @@ VALUE rb_clibssh_connection_hostname(VALUE self)
 {
   RB_SSH_CONNECTION *rb_ssh_connection;
   Data_Get_Struct(self, RB_SSH_CONNECTION, rb_ssh_connection);
-  VALUE rb_hostname_string = ENCODED_STR_NEW2(rb_ssh_connection->hostname, "UTF-8");
-  return rb_hostname_string;
+  VALUE rb_shostname = ENCODED_STR_NEW2(rb_ssh_connection->hostname, "UTF-8");
+  return rb_shostname;
 }
 
 VALUE initialize_rb_clibssh_connection(VALUE self, VALUE hostname, VALUE options)
@@ -54,7 +54,7 @@ VALUE initialize_rb_clibssh_connection(VALUE self, VALUE hostname, VALUE options
   Data_Get_Struct(self, RB_SSH_CONNECTION, rb_ssh_connection);
   str = StringValuePtr(hostname);
   rb_ssh_connection->hostname = str;
-  return rb_clibssh_connection;
+  return rb_cLibSSH_Connection;
 }
 
 VALUE alloc_rb_libssh_connection(VALUE class)
