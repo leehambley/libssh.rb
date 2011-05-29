@@ -23,6 +23,9 @@
 
 #endif
 
+#define LOCAL_SSH_CONNECTION_STRUCT_MACRO \
+  RB_SSH_CONNECTION *rb_ssh_connection; \
+  Data_Get_Struct(self, RB_SSH_CONNECTION, rb_ssh_connection); \
 
 extern VALUE rb_mLibSSH;
 extern VALUE rb_cLibSSH_Connection;
@@ -37,6 +40,7 @@ void Init_libsshrb_constants();
 VALUE initialize_rb_clibssh_connection(VALUE self, VALUE hostname, VALUE options);
 VALUE rb_clibssh_connection_hostname(VALUE self);
 VALUE rb_clibssh_connection_connected_q(VALUE self);
+VALUE rb_clibssh_connection_connect(VALUE self);
 
 typedef struct rb_ssh_connection
 {

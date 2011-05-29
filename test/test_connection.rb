@@ -27,4 +27,9 @@ class TestConnections < MiniTest::Unit::TestCase
     assert_equal 'hostname',  c.hostname
   end
 
+  def test_libssh_connection_should_accept_a_hash_for_a_port_param
+    c = LibSSH.connect 'hostname', :port => 2234
+    assert_equal 2234, c.port
+  end
+
 end

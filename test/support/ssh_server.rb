@@ -57,7 +57,7 @@ class SSH
           PasswordAuthentication yes
           ChrootDirectory <%= chroot %>
           PidFile <%= pid_file %>
-          LogLevel INFO
+          LogLevel DEBUG
         EOB
       end
       def chroot
